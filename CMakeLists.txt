@@ -6,7 +6,7 @@ else()
     project(allocator VERSION 0.0.1)
 endif()
 
-configure_file(version.h.in src/version.h)
+configure_file(version.h.in ${CMAKE_CURRENT_SOURCE_DIR}/src/version.h)
 
 add_executable(${PROJECT_NAME})
 
