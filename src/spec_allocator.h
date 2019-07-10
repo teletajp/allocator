@@ -7,7 +7,7 @@ template<class T, std::size_t N>
 class spec_allocator
 {
     static_assert(N != 0, "zero allocating");
-    using alloc_block_t = std::array<T, N>;
+    using alloc_block_t = std::array<uint8_t, sizeof(T)*N>;
     std::size_t free_size = N;
     std::size_t block_size = N;
     alloc_block_t mem_pool;
@@ -19,7 +19,7 @@ class spec_allocator
         {
             if(!free_size)  throw std::bad_alloc();
             if(n != 1)      throw std::invalid_argument("can't allocate bigger then 1 element.");
-            return &mem_pool[--free_size];
+            return reinterpret_cast<T*>(&mem_pool[(--free_size)*sizeof(T)]);
         }
 
         void deallocate(T *p, size_t n){};
