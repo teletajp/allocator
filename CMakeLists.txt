@@ -20,6 +20,9 @@ PROPERTIES
 target_sources(${PROJECT_NAME}
 PRIVATE
     src/main.cpp
+    src/fwd_list.h
+    src/spec_allocator.h
+    src/version.h
 )
 
 
