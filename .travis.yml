@@ -1,7 +1,6 @@
 dist: xenial
 language: cpp
 compiler: clang
-sudo: required
 addons:
   apt:
     sources:
@@ -11,7 +10,7 @@ addons:
     - libc++abi-7-dev
     update: true
 install:
-- pip install conan
+- sudo pip install conan
 script:
 - conan install -s compiler=clang -s compiler.libcxx=libc++ .
 - mkdir build
