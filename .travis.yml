@@ -10,9 +10,9 @@ addons:
     - libc++abi-7-dev
     update: true
 install:
-- pip install conan
+- sudo pip install conan
 script:
-- conan install -s compiler=clang -s compiler.libcxx=libc++ .
+- sudo conan install -s compiler=clang -s compiler.libcxx=libc++ .
 - mkdir build
 - cd build
 - CXXFLAGS="-stdlib=libc++" cmake ..
