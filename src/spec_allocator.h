@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <array>
 
-template<class T, std::size_t N>
+template<class T, std::size_t N = 1>
 class spec_allocator
 {
     static_assert(N != 0, "zero allocating");
