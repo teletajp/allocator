@@ -1,6 +1,7 @@
 dist: xenial
 language: cpp
 compiler: clang
+sudo: required
 addons:
   apt:
     sources:
@@ -10,13 +11,9 @@ addons:
     - libc++abi-7-dev
     update: true
 install:
-- pip install --user conan
-- conan user
-- ls -l /home/travis/.conan/profiles/
-- ls -l ~/.profile
-- source ~/.profile
-- conan install -s compiler=clang -s compiler.libcxx=libc++ .
+- pip install conan
 script:
+- conan install -s compiler=clang -s compiler.libcxx=libc++ .
 - mkdir build
 - cd build
 - CXXFLAGS="-stdlib=libc++" cmake ..
