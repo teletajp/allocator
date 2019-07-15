@@ -12,6 +12,7 @@ addons:
 install:
 - pip install --user conan
 - conan user
+- source ~/.profile
 - conan install -s compiler=clang -s compiler.libcxx=libc++ .
 script:
 - mkdir build
