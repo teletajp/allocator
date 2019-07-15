@@ -10,8 +10,7 @@ addons:
     - libc++abi-7-dev
     update: true
 install:
-- pip install --user conan
-- conan user
+- pip install conan
 script:
 - conan install -s compiler=clang -s compiler.libcxx=libc++ .
 - mkdir build
@@ -25,5 +24,4 @@ deploy:
   skip_cleanup: true
   script:
   - curl -T allocator-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -u teletajp:$BINTRAY_API_KEY "https://api.bintray.com/content/teletajp/otus-cpp/homework/$TRAVIS_BUILD_NUMBER/allocator-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=xenial;deb_component=main;deb_architecture=amd64;publish=1"
-  
   
