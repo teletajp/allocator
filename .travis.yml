@@ -11,6 +11,9 @@ addons:
     update: true
 install:
 - pip install --user conan
+- conan user
+- ls -l /home/travis/.conan/profiles/
+- ls -l ~/.profile
 - source ~/.profile
 - conan install -s compiler=clang -s compiler.libcxx=libc++ .
 script:
