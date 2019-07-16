@@ -9,9 +9,6 @@ addons:
     - libc++-7-dev
     - libc++abi-7-dev
     update: true
-install:
-- pip install --user conan
-- conan user
 script:
 - mkdir build
 - cd build
