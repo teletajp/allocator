@@ -12,12 +12,10 @@ addons:
 install:
 - pip install --user conan
 - conan user
-- ls -l
 script:
-- conan install -s compiler=clang -s compiler.libcxx=libc++ .
 - mkdir build
 - cd build
-- CXXFLAGS="-stdlib=libc++" cmake ..
+- CXXFLAGS="-std=c++17" cmake ..
 - cmake --build .
 - cmake --build . --target package
 deploy:
