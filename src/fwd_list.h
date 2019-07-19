@@ -43,18 +43,18 @@ public:
             allocator_.deallocate(cur_node, 1);
         }
     }
-    void push_back(T&& value)
-    {
-        try
-        {
-            auto & tail = *ptail_;
-            tail = allocator_.allocate(1);
-            allocator_.construct(tail, std::move(T(value)));
-            ptail_ = &tail->next_;
-        }
-        catch(std::bad_alloc ex) {throw ex;}
-        catch(std::invalid_argument ex) {throw ex;}  
-    }
+    //void push_back(T&& value)
+    //{
+    //    try
+    //    {
+    //        auto & tail = *ptail_;
+    //        tail = allocator_.allocate(1);
+    //        allocator_.construct(tail, std::move(T(value)));
+    //        ptail_ = &tail->next_;
+    //    }
+    //    catch(std::bad_alloc ex) {throw ex;}
+    //    catch(std::invalid_argument ex) {throw ex;}  
+    //}
     void push_back(T value)
     {
         try
