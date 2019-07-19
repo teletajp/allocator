@@ -53,7 +53,7 @@ class spec_allocator
         template <typename U, typename ... Args>
         void construct(U *p, Args&& ... args)
         {
-            new(p) U(std::forward<Args>(args) ...);
+            new(p) U(args ...);
             //std::cout << "construct:" << p << std::endl;
         }
         template <typename U>
