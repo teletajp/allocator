@@ -20,6 +20,7 @@ private:
 		T value_;
         node_type *next_;
 		node_type():value_{T()}, next_{nullptr}{}
+		node_type(T value):value_(value), next_(nullptr){}
 		node_type(T &&value):value_(std::move(value)), next_(nullptr){}
 		node_type(const node_type & rhs):value_(rhs.value), next_(rhs.next_){}
         const bool operator==(const node_type & rhs) const {return (value_==rhs.value_ && next_ == rhs.next_);};
@@ -54,7 +55,18 @@ public:
         catch(std::bad_alloc ex) {throw ex;}
         catch(std::invalid_argument ex) {throw ex;}  
     }
-
+    void push_back(T value)
+    {
+        try
+        {
+            auto & tail = *ptail_;
+            tail = allocator_.allocate(1);
+            allocator_.construct(tail, T(value));
+            ptail_ = &tail->next_;
+        }
+        catch (std::bad_alloc ex) { throw ex; }
+        catch (std::invalid_argument ex) { throw ex; }
+    }
     bool empty() const {return head_ == nullptr;};
 
     class fwd_list_iter

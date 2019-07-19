@@ -29,14 +29,14 @@ class spec_allocator
             
             if (!mem_pool)
             {
-                mem_pool = (uint8_t*)std::malloc( sizeof(T) * N);
-                free_size = N;
+                mem_pool = (uint8_t*)std::malloc( sizeof(T) * (N+1));
+                free_size = N+1;
             }
             if(!free_size)  throw std::bad_alloc();
             if(n != 1)      throw std::invalid_argument("can't allocate bigger then 1 element.");
             count++;
             T* p = reinterpret_cast<T*>(&mem_pool[(--free_size) * sizeof(T)]);
-            std::cout << "allocate:" << p <<std::endl;
+            //std::cout << "allocate:" << p <<std::endl;
             return p;
         };
 
