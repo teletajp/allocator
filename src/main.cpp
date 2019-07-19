@@ -24,21 +24,22 @@ int main(int argc, char const *argv[])
 
     for(auto [k,v]:num2fact_standart)
         std::cout << k << ' ' << v << std::endl;
-
-    std::map<int, int, std::less<int>, spec_allocator<std::pair<const int,int>, 10>> num2fact_nostandart;    
-    num2fact_nostandart.emplace(std::make_pair(0,factorial(0)));
-    num2fact_nostandart.emplace(std::make_pair(1,factorial(1)));
-    num2fact_nostandart.emplace(std::make_pair(2,factorial(2)));
-    num2fact_nostandart.emplace(std::make_pair(3,factorial(3)));
-    num2fact_nostandart.emplace(std::make_pair(4,factorial(4)));
-    num2fact_nostandart.emplace(std::make_pair(5,factorial(5)));
-    num2fact_nostandart.emplace(std::make_pair(6,factorial(6)));
-    num2fact_nostandart.emplace(std::make_pair(7,factorial(7)));
-    num2fact_nostandart.emplace(std::make_pair(8,factorial(8)));
-    num2fact_nostandart.emplace(std::make_pair(9,factorial(9)));
-    for(auto [k,v]:num2fact_nostandart)
-        std::cout << k << ' ' << v << std::endl;
-
+    {
+        std::map<int, int, std::less<int>, spec_allocator<std::pair<const int, int>, 10>> num2fact_nostandart;
+        std::cout << "end:" << num2fact_nostandart.end()._Ptr << std::endl;
+        num2fact_nostandart.emplace(std::make_pair(0, factorial(0)));
+        num2fact_nostandart.emplace(std::make_pair(1, factorial(1)));
+        num2fact_nostandart.emplace(std::make_pair(2, factorial(2)));
+        num2fact_nostandart.emplace(std::make_pair(3, factorial(3)));
+        num2fact_nostandart.emplace(std::make_pair(4, factorial(4)));
+        num2fact_nostandart.emplace(std::make_pair(5, factorial(5)));
+        num2fact_nostandart.emplace(std::make_pair(6, factorial(6)));
+        num2fact_nostandart.emplace(std::make_pair(7, factorial(7)));
+        num2fact_nostandart.emplace(std::make_pair(8, factorial(8)));
+        // num2fact_nostandart.emplace(std::make_pair(9,factorial(9)));
+        for (auto[k, v] : num2fact_nostandart)
+            std::cout << k << ' ' << v << std::endl;
+    }
     fwd_list<int> my_list_std_alloc;
     my_list_std_alloc.push_back(0);
     my_list_std_alloc.push_back(1);

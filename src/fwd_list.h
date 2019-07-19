@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-
+#include <iostream>
 template <class T, class Alloc = std::allocator<T>>
 class fwd_list
 {
@@ -19,8 +19,8 @@ private:
     {
 		T value_;
         node_type *next_;
-		node_type():value_{T()}, next_{nullptr}{}
-		node_type(const node_type & rhs):value_(rhs.value), next_(rhs.next_){}
+		node_type():value_{T()}, next_{nullptr}{std::cout << "constructor node" << std::endl;}
+		node_type(const node_type & rhs):value_(rhs.value), next_(rhs.next_){std::cout << "copy constructor node" << std::endl;}
         const bool operator==(const node_type & rhs) const {return (value_==rhs.value_ && next_ == rhs.next_);};
 	};
 
