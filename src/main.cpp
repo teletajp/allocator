@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
         num2fact_nostandart.emplace(std::make_pair(6, factorial(6)));
         num2fact_nostandart.emplace(std::make_pair(7, factorial(7)));
         num2fact_nostandart.emplace(std::make_pair(8, factorial(8)));
-        num2fact_nostandart.emplace(std::make_pair(9, factorial(9)));
+        //num2fact_nostandart.emplace(std::make_pair(9, factorial(9)));
         for (auto[k, v] : num2fact_nostandart)
             std::cout << k << ' ' << v << std::endl;
     }
@@ -53,19 +53,20 @@ int main(int argc, char const *argv[])
     my_list_std_alloc.push_back(9);
     for(auto v :my_list_std_alloc)
         std::cout << v << std::endl;
-
-    fwd_list<int, spec_allocator<int, 10>> my_list_my_alloc;
-    my_list_my_alloc.push_back(0);
-    my_list_my_alloc.push_back(1);
-    my_list_my_alloc.push_back(2);
-    my_list_my_alloc.push_back(3);
-    my_list_my_alloc.push_back(4);
-    my_list_my_alloc.push_back(5);
-    my_list_my_alloc.push_back(6);
-    my_list_my_alloc.push_back(7);
-    my_list_my_alloc.push_back(8);
-    my_list_my_alloc.push_back(9);
-    for(auto v :my_list_my_alloc)
-        std::cout << v << std::endl;
+    {
+        fwd_list<int, spec_allocator<int, 10>> my_list_my_alloc;
+        my_list_my_alloc.push_back(0);
+        my_list_my_alloc.push_back(1);
+        my_list_my_alloc.push_back(2);
+        my_list_my_alloc.push_back(3);
+        my_list_my_alloc.push_back(4);
+        my_list_my_alloc.push_back(5);
+        my_list_my_alloc.push_back(6);
+        my_list_my_alloc.push_back(7);
+        my_list_my_alloc.push_back(8);
+        my_list_my_alloc.push_back(9);
+        for (auto v : my_list_my_alloc)
+            std::cout << v << std::endl;
+    }
     return 0;
 }

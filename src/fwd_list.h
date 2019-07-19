@@ -19,30 +19,43 @@ private:
     {
 		T value_;
         node_type *next_;
-		node_type():value_{T()}, next_{nullptr}{std::cout << "constructor node" << std::endl;}
-		node_type(const node_type & rhs):value_(rhs.value), next_(rhs.next_){std::cout << "copy constructor node" << std::endl;}
+		node_type():value_{T()}, next_{nullptr}{}
+		node_type(T &&value):value_(std::move(value)), next_(nullptr){}
+		node_type(const node_type & rhs):value_(rhs.value), next_(rhs.next_){}
         const bool operator==(const node_type & rhs) const {return (value_==rhs.value_ && next_ == rhs.next_);};
 	};
 
-	node_type head_;
-	node_type *tail_ = nullptr;
+	node_type *head_ = nullptr;
+	node_type **ptail_ = nullptr;
     using allocator_t = typename alloc_traits:: template rebind_alloc<node_type>;
     allocator_t allocator_;
 public:
-    fwd_list():head_(), tail_(&head_){};
-    void push_back(const T& value)
+    fwd_list():head_(nullptr), ptail_(&head_){};
+    ~fwd_list()
+    {
+        auto node = head_;
+        while (node)
+        {
+            auto cur_node = node;
+            node = cur_node->next_;
+            allocator_.destroy(cur_node);
+            allocator_.deallocate(cur_node, 1);
+        }
+    }
+    void push_back(T&& value)
     {
         try
         {
-            tail_->value_ = value;
-            tail_->next_ = allocator_.allocate(1);
-            tail_ = tail_->next_;
+            auto & tail = *ptail_;
+            tail = allocator_.allocate(1);
+            allocator_.construct(tail, std::move(T(value)));
+            ptail_ = &tail->next_;
         }
         catch(std::bad_alloc ex) {throw ex;}
         catch(std::invalid_argument ex) {throw ex;}  
     }
 
-    bool empty() const {return tail_ == &head_;};
+    bool empty() const {return head_ == nullptr;};
 
     class fwd_list_iter
     {
@@ -50,7 +63,7 @@ public:
             node_type *node_;
         public:
             fwd_list_iter():node_(nullptr){}
-            fwd_list_iter(node_type &node):node_(&node){}
+            fwd_list_iter(node_type *node):node_(node){}
             fwd_list_iter(const fwd_list_iter& rhs):node_(rhs.node_){}
             const fwd_list_iter& operator=(const fwd_list_iter& rhs) {node_ = rhs.node_; return *this;}
             ~fwd_list_iter() = default;
@@ -63,5 +76,5 @@ public:
     using iterator = fwd_list_iter;
 
     iterator begin(){return iterator(head_);}
-    iterator end(){return iterator(*tail_);}
+    iterator end(){return iterator(*ptail_);}
 };
